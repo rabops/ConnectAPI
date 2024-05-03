@@ -27,7 +27,6 @@ headers = {
 
 response = requests.get(url, headers=headers)
 input_json = response.json()
-print(input_json)
 input_json = input_json["data"]
 
 #     return woocommerce_json
@@ -55,8 +54,8 @@ def convert_to_woocommerce_json(data):
 #  convert_to_woocommerce_json(input_json["data"])
 
 product_data = {
-    "category": "3WD",
-    "title": "Premium Quality"
+    "category": "5D",
+    "title": "Fintek Braid Line"
 }
 
 # Check if category exists, if not create one
@@ -72,19 +71,19 @@ else:
     category_id = category[0]['id']
 
 # Check if product exists, if not create one
-product = wcapi.get("products", params={"title": product_data["title"]}).json()
-if not product:
-    new_product_data = {
-        'name': product_data['title'],
-        'categories': [{'id': category_id}]
-    }
-    created_product = wcapi.post("products", new_product_data).json()
-    print("Product created:", created_product)
-else:
+product = wcapi.get("products", params={"search": product_data["title"]}).json()
+
+#product = wcapi.get("products/41117").json()
+print('checking...........product\n',product)
+if product:
     product_id = product[0]['id']
     # Update existing product's category
     product_update_data = {
         'categories': [{'id': category_id}]
     }
     updated_product = wcapi.put(f"products/{product_id}", product_update_data).json()
+<<<<<<< HEAD
+    
+=======
     print("Product updated:", updated_product)
+>>>>>>> 4a3da18 (remove comments)
