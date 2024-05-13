@@ -41,7 +41,7 @@ def hook():
     # Print data received
 
    payload_data = json.loads(data["payload"])
- #  print("Received shaishel ssss:", payload_data)
+   print("Received Payload Data - shaishel :", payload_data)
     # Extract title, ID, and category
    title = payload_data["name"]
  #  product_id = payload_data["id"]
